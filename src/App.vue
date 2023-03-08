@@ -18,8 +18,10 @@ export default {
 </script>
 
 <template>
-  =====================
-  {{ msg }}
+  <div>前后端初始化完成，可以调用接口；2023-3-8 huang</div>
+  <div>
+    {{ msg }}
+  </div>
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
