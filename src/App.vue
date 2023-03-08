@@ -1,8 +1,25 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import { ref } from 'vue';
+import HelloWorld from './components/HelloWorld.vue';
+import customRequest from "./lib/index";
+export default {
+  setup() {
+    console.log(1);
+    let msg = ref("");
+    customRequest('post/fn', {a: 1}).then((res)=>{
+      console.log(res);
+      msg.value = res.msg || '';
+    })
+    return {
+      msg
+    }
+  }
+}
 </script>
 
 <template>
+  =====================
+  {{ msg }}
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
