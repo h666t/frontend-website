@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-  <div>前后端初始化完成，可以调用接口；2023-3-8 huang</div>
+  <div style="font-size: 18px;">前后端初始化完成，可以调用接口；2023-3-8 huang</div>
   <div>
     {{ msg }}
   </div>
