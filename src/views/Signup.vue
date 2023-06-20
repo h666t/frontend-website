@@ -1,16 +1,26 @@
 <script setup lang="ts">
     import { useRouter } from "vue-router"
-    import { ref } from "vue";
+    import { reactive, ref } from "vue";
+    import makeRequest from "../lib/index";
     const router = useRouter()
     const onClickLeft = () => {
         router.push('/');
     }
-    const username = ref('');
-    const password = ref('');
+    const signupData = reactive({
+        username: '',
+        password: '',
+        confirmPassword: ''
+    })
     const onSubmit = (values: {username: string, password: string, confirmPassword: string}) => {
-      console.log('submit', values);
+        let {username, password, confirmPassword} = values;
+        if(username && password && confirmPassword && password === confirmPassword){
+            console.log('success');
+            makeRequest("signup", values).then(()=>{
+                alert("注册成功")
+                // router.push('/signin');
+            })
+        }
     };
-
 </script>
 <template>
     <van-nav-bar @click-left="onClickLeft" title="要不注册一下吧" left-text="返回" left-arrow>
@@ -20,14 +30,14 @@
     <van-form @submit="onSubmit" style="margin-top: 20px;">
         <van-cell-group inset>
             <van-field
-            v-model="username"
+            v-model="signupData.username"
             name="username"
             label="用户名"
             placeholder="用户名"
             :rules="[{ required: true, message: '请填写用户名' }]"
             />
             <van-field
-            v-model="password"
+            v-model="signupData.password"
             type="password"
             name="password"
             label="密码"
@@ -35,7 +45,7 @@
             :rules="[{ required: true, message: '请填写密码' }]"
             />
             <van-field
-            v-model="password"
+            v-model="signupData.confirmPassword"
             type="password"
             name="confirmPassword"
             label="确认密码"

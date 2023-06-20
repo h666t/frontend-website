@@ -10,10 +10,10 @@
         "https://s1.ax1x.com/2023/04/04/pp4ep34.jpg"
     ])
   let msg = ref("");
-  makeRequest('post/fn', {a: 1}).then((res)=>{
+  makeRequest('fn', {a: 1}).then((res)=>{
     console.log(res);
     msg.value = res.msg || '';
-  })
+  });
 </script>
 
 <template>
