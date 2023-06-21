@@ -2,6 +2,7 @@
     import { useRouter } from "vue-router"
     import { reactive, ref } from "vue";
     import makeRequest from "../lib/index";
+    import encrypt_lib from "../lib/encrypt"
     const router = useRouter()
     const onClickLeft = () => {
         router.push('/');
@@ -15,10 +16,18 @@
         let {username, password, confirmPassword} = values;
         if(username && password && confirmPassword && password === confirmPassword){
             console.log('success');
-            makeRequest("signup", values).then(()=>{
-                alert("注册成功")
-                // router.push('/signin');
-            })
+            let encrypt_password = encrypt_lib.encrypt(`${password}`);
+            if(encrypt_password){
+                makeRequest("signup", {
+                    username,
+                    password: encrypt_password
+                }).then(()=>{
+                    alert("注册成功")
+                    // router.push('/signin');
+                })
+            } else {
+                alert("加密出错")
+            }
         }
     };
 </script>
