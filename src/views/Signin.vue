@@ -1,6 +1,9 @@
 <script setup lang="ts">
     import { useRouter } from "vue-router"
     import { ref } from "vue";
+    import makeRequest from "../lib/index";
+    import encrypt_lib from "../lib/encrypt";
+
     const router = useRouter()
     const onClickLeft = () => {
         router.push('/');
@@ -8,7 +11,19 @@
     const username = ref('');
     const password = ref('');
     const onSubmit = (values: {username: string, password: string}) => {
-      console.log('submit', values);
+            let {username, password} = values;
+            let encrypt_password = encrypt_lib.encrypt(`${password}`);
+            if(encrypt_password){
+                makeRequest("signin", {
+                    username,
+                    password: encrypt_password
+                }).then(()=>{
+                    alert("登录成功")
+                    // router.push('/signin');
+                })
+            } else {
+                alert("加密出错")
+            }
     };
 
 </script>

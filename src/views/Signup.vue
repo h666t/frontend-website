@@ -2,7 +2,9 @@
     import { useRouter } from "vue-router"
     import { reactive, ref } from "vue";
     import makeRequest from "../lib/index";
-    import encrypt_lib from "../lib/encrypt"
+    import encrypt_lib from "../lib/encrypt";
+    import { FieldRuleValidator } from "vant";
+
     const router = useRouter()
     const onClickLeft = () => {
         router.push('/');
@@ -11,7 +13,23 @@
         username: '',
         password: '',
         confirmPassword: ''
-    })
+    });
+    const validatorUsername: FieldRuleValidator = (value, rule) => {
+        let reg = /^[a-zA-Z0-9]{6,12}$/;
+        if(reg.test(value)){
+            return true;
+        } else {
+            return '只支持6-12位的字母/数字';
+        };
+    };
+    const validatorPassword: FieldRuleValidator = (value, rule) => {
+        let reg = /^[a-zA-Z0-9]{6,15}$/;
+        if(reg.test(value)){
+            return true;
+        } else {
+            return '只支持6-15的字母/数字';
+        };
+    };
     const onSubmit = (values: {username: string, password: string, confirmPassword: string}) => {
         let {username, password, confirmPassword} = values;
         if(username && password && confirmPassword && password === confirmPassword){
@@ -43,7 +61,7 @@
             name="username"
             label="用户名"
             placeholder="用户名"
-            :rules="[{ required: true, message: '请填写用户名' }]"
+            :rules="[{ required: true, message: '请填写用户名', validator: validatorUsername }]"
             />
             <van-field
             v-model="signupData.password"
@@ -51,7 +69,7 @@
             name="password"
             label="密码"
             placeholder="密码"
-            :rules="[{ required: true, message: '请填写密码' }]"
+            :rules="[{ required: true, message: '请填写密码', validator: validatorPassword }]"
             />
             <van-field
             v-model="signupData.confirmPassword"
