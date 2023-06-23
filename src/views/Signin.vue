@@ -20,7 +20,9 @@
                 }).then(()=>{
                     alert("登录成功")
                     // router.push('/signin');
-                })
+                }, (error) => {
+                    console.log(error)
+                });
             } else {
                 alert("加密出错")
             }

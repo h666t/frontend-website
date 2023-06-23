@@ -8,9 +8,12 @@ const makeRequest = async (apiMethodAndName: string, params: object = {}) => {
         apiName = method;
         method = "post";
     }
-    
-    let response = await axios[method as 'get' | 'post'](`${backendURL}/api/${apiName}`, params || {});
-    return response.data;
+    try {
+        let result = await axios[method as 'get' | 'post'](`${backendURL}/api/${apiName}`, params || {}); 
+        return result.data;
+    } catch (error: any) {
+        throw new Error(error.response.data);   
+    }
 }
 
 export default makeRequest
