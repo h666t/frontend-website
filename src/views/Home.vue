@@ -1,24 +1,43 @@
 <script setup lang="ts">
     // import { Swipe, SwipeItem } from 'vant';
-    import { reactive } from 'vue';
-    import { ref } from 'vue';
+    import { ref, reactive, nextTick } from 'vue';
     import makeRequest from "../lib/index";
+    import {Account} from "../custom"
 
     const bannerImageList = reactive([
-        // "https://s1.ax1x.com/2023/04/04/pp4eSCF.jpg",
         "https://s1.ax1x.com/2023/04/04/pp4Zx4U.jpg",
         "https://s1.ax1x.com/2023/04/04/pp4ep34.jpg"
-    ])
+    ]);
   let msg = ref("");
+  let refresh = ref(0);
+  let account = reactive<Account>({
+    id: "@",
+    name: "@",
+    password: "@",
+    create_at: "@",
+    update_at: "@",
+    is_removed: null
+  });
   makeRequest('fn', {a: 1}).then((res)=>{
     console.log(res);
     msg.value = res.msg || '';
   });
+  setTimeout(()=>{
+    makeRequest('get/getIsLogin').then((res)=>{
+        account = res;
+        refresh.value += 1;
+    });
+  }, 500);
 </script>
 
 <template>
     <van-nav-bar title="米奇妙妙屋" :fixed="true" :placeholder="true" :safe-area-inset-top="true">
-        <template #right>
+        <template v-if="account.id === '@'" #right>
+            <router-link to="/signin">
+                <span>登录/注册</span>
+            </router-link>
+        </template>
+        <template v-else #right>
             <router-link to="/signin">
                 <van-icon name="contact" />
             </router-link>
@@ -34,6 +53,7 @@
     <div>2023-4-4 huang</div>
     <div>
         {{ msg }}
+        {{ refresh }}
     </div>
 </template>
 

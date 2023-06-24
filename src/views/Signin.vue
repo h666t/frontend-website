@@ -3,6 +3,10 @@
     import { ref } from "vue";
     import makeRequest from "../lib/index";
     import encrypt_lib from "../lib/encrypt";
+    import { showSuccessToast, showFailToast } from 'vant';
+
+
+
 
     const router = useRouter()
     const onClickLeft = () => {
@@ -18,10 +22,10 @@
                     username,
                     password: encrypt_password
                 }).then(()=>{
-                    alert("登录成功")
-                    // router.push('/signin');
+                    showSuccessToast("登录成功");
+                    router.push('/');
                 }, (error) => {
-                    console.log(error)
+                    showFailToast(error.message);
                 });
             } else {
                 alert("加密出错")
