@@ -1,6 +1,6 @@
 import {backendURL} from "../../custom.json";
 import axios from 'axios';
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 const makeRequest = async (apiMethodAndName: string, params: object = {}) => {
     let method = apiMethodAndName.split("/")[0];
     let apiName = apiMethodAndName.split("/")[1];
