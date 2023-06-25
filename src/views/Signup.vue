@@ -3,7 +3,7 @@
     import { reactive, ref } from "vue";
     import makeRequest from "../lib/index";
     import encrypt_lib from "../lib/encrypt";
-    import { FieldRuleValidator } from "vant";
+    import { FieldRuleValidator, showSuccessToast } from "vant";
 
     const router = useRouter()
     const onClickLeft = () => {
@@ -15,11 +15,11 @@
         confirmPassword: ''
     });
     const validatorUsername: FieldRuleValidator = (value, rule) => {
-        let reg = /^[a-zA-Z0-9]{6,12}$/;
+        let reg = /^[a-zA-Z0-9]{5,12}$/;
         if(reg.test(value)){
             return true;
         } else {
-            return '只支持6-12位的字母/数字';
+            return '只支持5-12位的字母/数字';
         };
     };
     const validatorPassword: FieldRuleValidator = (value, rule) => {
@@ -40,8 +40,8 @@
                     username,
                     password: encrypt_password
                 }).then(()=>{
-                    alert("注册成功")
-                    // router.push('/signin');
+                    showSuccessToast("登录成功");
+                    router.push('/signin');
                 })
             } else {
                 alert("加密出错")

@@ -14,21 +14,23 @@
     }
     const username = ref('');
     const password = ref('');
-    const onSubmit = (values: {username: string, password: string}) => {
+    const onSubmit = async (values: {username: string, password: string}) => {
             let {username, password} = values;
             let encrypt_password = encrypt_lib.encrypt(`${password}`);
             if(encrypt_password){
-                makeRequest("signin", {
-                    username,
-                    password: encrypt_password
-                }).then(()=>{
+                try {
+                    await makeRequest("signin", {
+                        username,
+                        password: encrypt_password
+                    });
+                     
                     showSuccessToast("登录成功");
                     router.push('/');
-                }, (error) => {
+                } catch (error: any) {
                     showFailToast(error.message);
-                });
+                }
             } else {
-                alert("加密出错")
+                showFailToast("加密出错")
             }
     };
 

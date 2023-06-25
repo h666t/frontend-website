@@ -38,8 +38,8 @@
             </router-link>
         </template>
         <template v-else #right>
-            <router-link to="/signin">
-                <van-icon name="contact" />
+            <router-link to="/mine">
+                <span>你好, {{ account.name }}</span>
             </router-link>
         </template>
     </van-nav-bar>
@@ -51,8 +51,8 @@
 
     <div style="font-size: 18px;">前后端初始化完成，可以调用接口；</div>
     <div>2023-4-4 huang</div>
-    <div>
-        {{ msg }}
+    <div>{{ msg }}</div>
+    <div style="opacity: 0;">
         {{ refresh }}
     </div>
 </template>
