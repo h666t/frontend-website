@@ -5,7 +5,8 @@
     import {Account} from "../custom"
 
     const bannerImageList = reactive([
-        "https://img1.imgtp.com/2023/08/19/TrS5u1VV.jpg"
+        "https://img1.imgtp.com/2023/08/19/TrS5u1VV.jpg",
+        "https://img1.imgtp.com/2023/08/19/TrS5u1VV.jpg",
     ]);
   let msg = ref("");
   let refresh = ref(0);
@@ -42,9 +43,11 @@
             </router-link>
         </template>
     </van-nav-bar>
-    <van-swipe class="my-swipe" :autoplay="5000" indicator-color="white">
+    <van-swipe class="my-swipe" :autoplay="5000" indicator-color="white" >
         <van-swipe-item v-for="item in bannerImageList" :key="item">
-            <img class="bannerImage" :src="item" />
+            <div style="display: flex;justify-content: center;">
+                <img class="bannerImage" :src="item" />
+            </div>
         </van-swipe-item>
     </van-swipe>
 
@@ -66,10 +69,15 @@
         justify-content: center;
     }
     .my-swipe{
-        height: 250px;
+        height: 200px;
         width: 100vw;
     }
-    .bannerImage{
+    .bannerDiv{
         width: 100vw;
+        height: 200px;
+    }
+    .bannerImage{
+        width: 200px;
+        height: 200px;
     }
 </style>
