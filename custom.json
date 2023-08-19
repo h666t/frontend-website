@@ -1,4 +1,4 @@
 {
-    "backendURL": "http://47.92.103.180:3000",
+    "backendURL": "http://127.0.0.1:3000",
     "publicKey": "-----BEGIN PUBLIC KEY-----\nMFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALm8ibVpa9i7NGQwFg/jVPWX1b9z5vD9\npc9AWpyL9es5Djwp2QyNoiNMZpTMgMo71vz+CetulU+0IeP4qGTT0yMCAwEAAQ==\n-----END PUBLIC KEY-----"
 }
