@@ -10,7 +10,7 @@
     ]);
   let msg = ref("");
   let refresh = ref(0);
-  let account = reactive<Account>({
+  let account = ref<Account>({
     id: "@",
     name: "@",
     password: "@",
@@ -19,15 +19,12 @@
     is_removed: null
   });
   makeRequest('fn', {a: 1}).then((res)=>{
-    console.log(res);
     msg.value = res.msg || '';
   });
-  setTimeout(()=>{
-    makeRequest('get/getIsLogin').then((res)=>{
-        account = res;
-        refresh.value += 1;
+  
+  makeRequest('get/getIsLogin').then((res)=>{
+        account.value = res;
     });
-  }, 500);
 </script>
 
 <template>
@@ -54,9 +51,6 @@
     <div style="font-size: 18px;">前后端初始化完成，可以调用接口；</div>
     <div>2023-4-4 huang</div>
     <div>{{ msg }}</div>
-    <div style="opacity: 0;">
-        {{ refresh }}
-    </div>
 </template>
 
 <style scoped>
