@@ -13,11 +13,9 @@
         update_at: "@",
         is_removed: null
     });
-    setTimeout(()=>{
-        makeRequest('get/getIsLogin').then((res)=>{
-            account.value = res;
-        });
-    }, 500);
+    makeRequest('get/getIsLogin').then((res)=>{
+        account.value = res;
+    });
     const signout = () => {
         makeRequest('get/signout').then((res)=>{
             router.push("/");
