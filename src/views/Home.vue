@@ -5,8 +5,7 @@
     import {Account} from "../custom"
 
     const bannerImageList = reactive([
-        "https://s1.ax1x.com/2023/04/04/pp4Zx4U.jpg",
-        "https://s1.ax1x.com/2023/04/04/pp4ep34.jpg"
+        "https://img1.imgtp.com/2023/08/19/TrS5u1VV.jpg"
     ]);
   let msg = ref("");
   let refresh = ref(0);
