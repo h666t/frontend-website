@@ -4,4 +4,5 @@ rm -rf ./dist &&
 yarn build &&
 git add . && 
 git commit -m 'update' &&
-git push
+git push gitee master -f &&
+git push origin master
