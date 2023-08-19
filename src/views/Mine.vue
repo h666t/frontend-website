@@ -1,12 +1,11 @@
 <script setup lang="ts">
-    import { ref, reactive, nextTick } from 'vue';
+    import { ref, nextTick } from 'vue';
     import makeRequest from "../lib/index";
     import {Account} from "../custom"
     import { useRouter } from 'vue-router';
 
     const router = useRouter();
-    let refresh = ref(0);
-    let account = reactive<Account>({
+    let account = ref<Account>({
         id: "@",
         name: "@",
         password: "@",
@@ -16,8 +15,7 @@
     });
     setTimeout(()=>{
         makeRequest('get/getIsLogin').then((res)=>{
-            account = res;
-            refresh.value += 1;
+            account.value = res;
         });
     }, 500);
     const signout = () => {
@@ -38,7 +36,6 @@
     <router-link v-else to="/signin">
         <div style="text-align: center;margin-top: 40px;">请先登录</div>
     </router-link>
-    <span style="opacity: 0;">{{ refresh }}</span>
 </template>
 
 <style scoped>
