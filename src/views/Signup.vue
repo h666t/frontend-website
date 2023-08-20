@@ -3,7 +3,7 @@
     import { reactive, ref } from "vue";
     import makeRequest from "../lib/index";
     import encrypt_lib from "../lib/encrypt";
-    import { FieldRuleValidator, showSuccessToast } from "vant";
+    import { FieldRuleValidator, showSuccessToast, showFailToast } from "vant";
 
     const router = useRouter()
     const onClickLeft = () => {
@@ -42,6 +42,8 @@
                 }).then(()=>{
                     showSuccessToast("注册成功");
                     router.push('/signin');
+                }, (error: any)=>{
+                    showFailToast(error.message);
                 })
             } else {
                 alert("加密出错")
