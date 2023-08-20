@@ -40,7 +40,7 @@
                     username,
                     password: encrypt_password
                 }).then(()=>{
-                    showSuccessToast("登录成功");
+                    showSuccessToast("注册成功");
                     router.push('/signin');
                 })
             } else {
