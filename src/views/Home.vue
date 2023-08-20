@@ -3,7 +3,7 @@
     import { ref, reactive, nextTick } from 'vue';
     import makeRequest from "../lib/index";
     import {Account} from "../custom"
-
+    import ProjectList from "../components/ProjectList.vue";
     const bannerImageList = reactive([
         "https://img1.imgtp.com/2023/08/19/TrS5u1VV.jpg",
         "https://img1.imgtp.com/2023/08/19/TrS5u1VV.jpg",
@@ -47,10 +47,8 @@
             </div>
         </van-swipe-item>
     </van-swipe>
-
-    <div style="font-size: 18px;">前后端初始化完成，可以调用接口；</div>
-    <div>2023-4-4 huang</div>
-    <div>{{ msg }}</div>
+    <div style="position: fixed;bottom: 10px; right: 10px; opacity: 0.5;">{{ msg }}</div>
+    <ProjectList />
 </template>
 
 <style scoped>
