@@ -81,8 +81,8 @@
                     let radians = angle * Math.PI / 180;
                     
                     // cos(radians) = 临边/半径 * 半径
-                    let fire_x = x + Math.cos(radians)*currentRadius;
-                    let fire_y = y + Math.sin(radians)*currentRadius;
+                    let fire_x = x + Math.cos(radians)*currentRadius + getRandomArbitrary(-10, 10);
+                    let fire_y = y + Math.sin(radians)*currentRadius ;
                     if(now % 2 == 0){
                         ctx.fillStyle = `hsl( ${getRandomInt(300,359)} ${getRandomInt(40,60)}% ${getRandomInt(40,60) * fire_item.alpha}%)`;
                     } else {
